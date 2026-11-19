@@ -49,6 +49,8 @@ uv --version
    - The status line should say **Server is running**.
    - Turn on **Auto Start** so it starts with Blender next time. Auto Start only takes effect when Blender launches, so start it by hand the first time.
 
+   ![Blender Preferences showing the MCP add-on (Blender Lab, v1.0.3) on port 9876 with Auto Start on and "Server is running"](images/blender-mcp-addon-running.png)
+
 ---
 
 ## Step 2: Get the MCP server
