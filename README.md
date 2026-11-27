@@ -29,12 +29,48 @@ There are two parts, and you need both:
 - **[uv](https://docs.astral.sh/uv/)**, the Python package manager
 - Port **9876** free. Don't run another Blender MCP add-on at the same time.
 
-Install uv if you don't have it:
+### Check if Git is installed
+
+Open PowerShell and run:
+
+```powershell
+git --version
+```
+
+- If it prints something like `git version 2.x.x.windows.1`, Git is installed. Skip to **Install uv**.
+- If you get *"git : The term 'git' is not recognized…"*, install Git first.
+
+### Install Git
+
+With **winget**, which comes with Windows 11:
+
+```powershell
+winget install --id Git.Git -e --source winget
+```
+
+Or download the installer from <https://git-scm.com/download/win> and run it. The default options are fine.
+
+Then **close PowerShell and open a new window** so it finds Git, and check again:
+
+```powershell
+git --version
+```
+
+### Install uv
+
+Check if it's installed:
+
+```powershell
+uv --version
+```
+
+If it isn't, install it:
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-uv --version
 ```
+
+Then open a new PowerShell window and run `uv --version` again.
 
 ---
 
@@ -59,6 +95,8 @@ uv --version
 ---
 
 ## Step 2: Get the MCP server
+
+This step needs **Git** and **uv**. If `git --version` gives an error, see [Check if Git is installed](#check-if-git-is-installed) above.
 
 Clone the official repo. This guide clones it to `C:\blender_mcp`:
 
@@ -200,6 +238,7 @@ It has no asset-library or AI model-generation tools. Those are in other, commun
 | `blender` shows an error in Local MCP servers | Click **View logs**. Most often `C:\blender_mcp\mcp` doesn't exist (run the clone in Step 2) or the `uv.exe` path is wrong. |
 | Blender tools don't appear in Claude | Check the JSON is valid, check the paths, **fully** quit and reopen Claude, then start a **new** chat. |
 | `uv` not found | Use the full path to `uv.exe` in `"command"`. |
+| `git : The term 'git' is not recognized` | Git isn't installed, or PowerShell was open before you installed it. Run `winget install --id Git.Git -e --source winget`, then open a new PowerShell window. |
 | Blender too old | Update to 5.1 or newer. |
 
 ---
