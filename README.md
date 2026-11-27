@@ -37,7 +37,7 @@ Open PowerShell and run:
 git --version
 ```
 
-- If it prints something like `git version 2.x.x.windows.1`, Git is installed. Skip to **Install uv**.
+- If it prints something like `git version 2.x.x.windows.1`, Git is installed. Skip to **Check if uv is installed**.
 - If you get *"git : The term 'git' is not recognized…"*, install Git first.
 
 ### Install Git
@@ -56,21 +56,38 @@ Then **close PowerShell and open a new window** so it finds Git, and check again
 git --version
 ```
 
-### Install uv
-
-Check if it's installed:
+### Check if uv is installed
 
 ```powershell
 uv --version
 ```
 
-If it isn't, install it:
+- If it prints something like `uv 0.13.10`, uv is installed. Note where it is, because you'll need the full path in Step 3:
+
+  ```powershell
+  where.exe uv
+  ```
+
+  This usually prints `C:\Users\YOUR_NAME\.local\bin\uv.exe`.
+- If you get *"uv : The term 'uv' is not recognized…"*, uv may still be installed but not on your PATH, which is common right after installing. Check the default location:
+
+  ```powershell
+  Test-Path "$env:USERPROFILE\.local\bin\uv.exe"
+  ```
+
+  `True` means it's installed. Just open a new PowerShell window. `False` means install it (below).
+
+### Install uv
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-Then open a new PowerShell window and run `uv --version` again.
+It installs to `C:\Users\YOUR_NAME\.local\bin`. At the end it says *"To add … to your PATH, restart your shell"*, so **close PowerShell, open a new window**, and check again:
+
+```powershell
+uv --version
+```
 
 ---
 
@@ -96,7 +113,7 @@ Then open a new PowerShell window and run `uv --version` again.
 
 ## Step 2: Get the MCP server
 
-This step needs **Git** and **uv**. If `git --version` gives an error, see [Check if Git is installed](#check-if-git-is-installed) above.
+This step needs **Git** and **uv**. If `git --version` or `uv --version` gives an error, see [Check if Git is installed](#check-if-git-is-installed) and [Check if uv is installed](#check-if-uv-is-installed) above.
 
 Clone the official repo. This guide clones it to `C:\blender_mcp`:
 
